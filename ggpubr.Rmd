@@ -1,0 +1,68 @@
+---
+title: "ggpubr Tutorial"
+author: "Shaurita D. Hutchins"
+date: "2022-12-07"
+output:
+  html_document:
+    code_folding: hide
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "docs",
+      output_file = "index.html"
+    )
+  })
+---
+
+```{r setup, include=TRUE, echo=FALSE, warning = FALSE, message = FALSE}
+library(ggpubr)
+library(tidyverse)
+```
+# Examples
+
+## An Example MA Plot
+
+```{r maplot, include=TRUE, echo=TRUE, warning = FALSE, message = FALSE}
+data(diff_express)
+
+# MA PLOT
+maplot <- ggmaplot(diff_express, main = expression("Group 1" %->% "Group 2"),
+         fdr = 0.05, fc = 2, size = 0.4,
+         palette = c("#B31B21", "#1465AC", "darkgray"),
+         genenames = as.vector(diff_express$name),
+         legend = "top", top = 20,
+         font.label = c("bold", 11), label.rectangle = TRUE,
+         font.legend = "bold",
+         font.main = "bold",
+         ggtheme = ggplot2::theme_minimal())
+
+txt <- "\nFigure 1. Networks representing known interactions involving miR-29 and miR-204 related to PAH. The green arrows depict activation,whereas the lines show inhibition."
+x <- annotate_figure(maplot,
+                bottom = text_grob(txt, color = "black",
+                                   hjust = 1, x = 1,  size = 10))
+x
+#ggexport(x, filename = "ma_example.png", width = 800)
+```
+
+## An Example Box Plot
+
+```{r boxplot, include=TRUE, echo=TRUE, warning = FALSE, message = FALSE}
+# Load data
+data("ToothGrowth")
+df <- ToothGrowth
+# Change outline colors by groups: dose
+# Use custom color palette
+# Add jitter points and change the shape by groups
+p <- ggboxplot(df, x = "dose", y = "len",
+               color = "dose", palette = c("#144B39", "#88C408", "#A69363"),
+               add = "jitter", shape = "dose")
+# Add p-values comparing groups
+# Specify the comparisons you want
+my_comparisons <- list( c("0.5", "1"), c("1", "2"), c("0.5", "2") )
+bp <- p + stat_compare_means(comparisons = my_comparisons) + # Add pairwise comparisons p-value
+  stat_compare_means(label.y = 50)                   # Add global p-value
+
+y <- annotate_figure(bp, fig.lab = "Box Plot of Tooth Growth", fig.lab.pos = "top.left", fig.lab.face = "bold")
+y
+#ggexport(y, filename = "box_example.png", width = 800)
+```
