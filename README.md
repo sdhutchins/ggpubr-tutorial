@@ -2,9 +2,13 @@
 
 The goal of ggpubr-tutorial is to introduce [ggpubr](https://rpkgs.datanovia.com/ggpubr/) to graduate students who want to learn how to make publication ready figures.
 
-In this tutorial, I create a ma plot and a box plot using `ggpubr`. The tutorial can be viewed at https://www.shauritahutchins.com/ggpubr-tutorial/.
+In this tutorial, I create a ma plot and a box plot using `ggpubr`. The tutorial can be viewed at https://www.shauritahutchins.com/ggpubr-tutorial/. 
+
+Also, the powerpoint slides are available on [Canva](https://www.canva.com/design/DAFTYzLnxME/CvlEpd0wZOqoYSTnXKeOkw/view?utm_content=DAFTYzLnxME&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink).
 
 ## Getting Started
+
+`ggpubr` is an R package that provides easy-to-use functions for creating and customizing 'ggplot2'-based publication ready plots. These include histograms, violin plots, dot plots, MA plots, QQ plots, correlation plots, pie charts, donut charts, and more. It also provides basic statistical functions. With ggpubr, it is easy to produce professional-quality plots with just a few lines of code.
 
 
 ### Installing R, RStudio, and the R packages
