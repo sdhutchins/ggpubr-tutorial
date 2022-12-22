@@ -8,6 +8,9 @@ Also, the powerpoint slides are available on [Canva](https://www.canva.com/desig
 
 ## Getting Started
 
+`ggpubr` is an R package that provides easy-to-use functions for creating and customizing 'ggplot2'-based publication ready plots. These include histograms, violin plots, dot plots, MA plots, QQ plots, correlation plots, pie charts, donut charts, and more. It also provides basic statistical functions. With ggpubr, it is easy to produce professional-quality plots with just a few lines of code.
+
+
 ### Installing R, RStudio, and the R packages
 
 In order to rerun this code, the below should be installed:
