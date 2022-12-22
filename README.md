@@ -2,10 +2,11 @@
 
 The goal of ggpubr-tutorial is to introduce [ggpubr](https://rpkgs.datanovia.com/ggpubr/) to graduate students who want to learn how to make publication ready figures.
 
-In this tutorial, I create a ma plot and a box plot using `ggpubr`. The tutorial can be viewed at https://www.shauritahutchins.com/ggpubr-tutorial/.
+In this tutorial, I create a ma plot and a box plot using `ggpubr`. The tutorial can be viewed at https://www.shauritahutchins.com/ggpubr-tutorial/. 
+
+Also, the powerpoint slides are available on [Canva](https://www.canva.com/design/DAFTYzLnxME/CvlEpd0wZOqoYSTnXKeOkw/view?utm_content=DAFTYzLnxME&utm_campaign=designshare&utm_medium=link&utm_source=publishsharelink).
 
 ## Getting Started
-
 
 ### Installing R, RStudio, and the R packages
 
