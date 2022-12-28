@@ -445,10 +445,27 @@ display: none;
 </div>
 
 
-<div id="examples" class="section level1">
-<h1>Examples</h1>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The <code>ggpubr</code> package is a useful tool for creating
+visualizations in R using the <code>ggplot2</code> package. It provides
+a number of functions for creating common plots such as scatter plots,
+box plots, and bar plots, and also includes functions for adding
+statistical tests and annotation to plots.</p>
+<div id="examples" class="section level2">
+<h2>Examples</h2>
+<p>Below are two examples.</p>
+</div>
 <div id="an-example-ma-plot" class="section level2">
 <h2>An Example MA Plot</h2>
+<p>The <code>ggmaplot</code> function from the <code>ggpubr</code>
+package is used to create an MA plot, which is a type of scatter plot
+used to visualize the results of a differential expression analysis. The
+<code>diff_express</code> data set is provided as input, and various
+arguments are passed to customize the plot, such as the main title, the
+false discovery rate, the fold change threshold, the color palette, and
+the font sizes and styles. The <code>annotate_figure</code> function is
+then used to add text annotation to the plot.</p>
 <pre class="r"><code>data(diff_express)
 
 # MA PLOT
@@ -472,6 +489,16 @@ x</code></pre>
 </div>
 <div id="an-example-box-plot" class="section level2">
 <h2>An Example Box Plot</h2>
+<p>The <code>ggboxplot</code> function is used to create a box plot
+using the <code>ToothGrowth</code> data set. The <code>dose</code> and
+<code>len</code> variables are specified as the x and y variables,
+respectively, and the <code>color</code>, <code>palette</code>,
+<code>add</code>, and <code>shape</code> arguments are used to customize
+the appearance of the plot. The <code>stat_compare_means</code> function
+is then used to add p-values for pairwise comparisons between the
+different groups and a global p-value to the plot. The
+<code>annotate_figure</code> function is used again to add a figure
+label to the plot.</p>
 <pre class="r"><code># Load data
 data(&quot;ToothGrowth&quot;)
 df &lt;- ToothGrowth
