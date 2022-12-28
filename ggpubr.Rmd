@@ -18,9 +18,18 @@ knit: (function(input, ...) {
 library(ggpubr)
 library(tidyverse)
 ```
-# Examples
+# Introduction
+
+The `ggpubr` package is a useful tool for creating visualizations in R using the `ggplot2` package. It provides a number of functions for creating common plots such as scatter plots, box plots, and bar plots, and also includes functions for adding statistical tests and annotation to plots.
+
+## Examples
+
+Below are two examples.
 
 ## An Example MA Plot
+
+The `ggmaplot` function from the `ggpubr` package is used to create an MA plot, which is a type of scatter plot used to visualize the results of a differential expression analysis. The `diff_express` data set is provided as input, and various arguments are passed to customize the plot, such as the main title, the false discovery rate, the fold change threshold, the color palette, and the font sizes and styles. The `annotate_figure` function is then used to add text annotation to the plot.
+
 
 ```{r maplot, include=TRUE, echo=TRUE, warning = FALSE, message = FALSE}
 data(diff_express)
@@ -45,6 +54,8 @@ x
 ```
 
 ## An Example Box Plot
+
+The `ggboxplot` function is used to create a box plot using the `ToothGrowth` data set. The `dose` and `len` variables are specified as the x and y variables, respectively, and the `color`, `palette`, `add`, and `shape` arguments are used to customize the appearance of the plot. The `stat_compare_means` function is then used to add p-values for pairwise comparisons between the different groups and a global p-value to the plot. The `annotate_figure` function is used again to add a figure label to the plot.
 
 ```{r boxplot, include=TRUE, echo=TRUE, warning = FALSE, message = FALSE}
 # Load data
