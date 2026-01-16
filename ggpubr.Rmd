@@ -18,6 +18,7 @@ knit: (function(input, ...) {
 library(ggpubr)
 library(tidyverse)
 ```
+
 # Introduction
 
 The `ggpubr` package is a useful tool for creating visualizations in R using the `ggplot2` package. It provides a number of functions for creating common plots such as scatter plots, box plots, and bar plots, and also includes functions for adding statistical tests and annotation to plots.
@@ -45,12 +46,14 @@ maplot <- ggmaplot(diff_express, main = expression("Group 1" %->% "Group 2"),
          font.main = "bold",
          ggtheme = ggplot2::theme_minimal())
 
+maplot <- maplot + ggpubr::theme_pubclean()
+
 txt <- "\nFigure 1. Networks representing known interactions involving miR-29 and miR-204 related to PAH. The green arrows depict activation,whereas the lines show inhibition."
 x <- annotate_figure(maplot,
                 bottom = text_grob(txt, color = "black",
                                    hjust = 1, x = 1,  size = 10))
 x
-#ggexport(x, filename = "ma_example.png", width = 800)
+ggexport(x, filename = "ma_example.png", width = 800)
 ```
 
 ## An Example Box Plot
