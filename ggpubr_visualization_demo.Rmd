@@ -1,0 +1,131 @@
+---
+title: "How to Make Your Plots Not Ugly in R (with ggpubr)"
+author: "Shaurita D. Hutchins"
+date: "2025-05-20"
+output:
+  html_document:
+    code_folding: hide
+knit: (function(input, ...) {
+    rmarkdown::render(
+      input,
+      output_dir = "docs",
+      output_file = "additional.html"
+    )
+  })
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(ggpubr)
+library(airway)
+library(DESeq2)
+library(tidyverse)
+library(RColorBrewer)
+library(viridis)
+library(EnhancedVolcano)
+library(ggsci)
+library(patchwork)
+```
+
+## Why Visualization Matters
+
+Well-designed figures communicate results faster and more clearly than text.
+
+## The Problem with Defaults
+```{r}
+ggplot(mtcars, aes(factor(cyl), mpg)) + geom_boxplot()
+```
+
+## Before: Unstyled Plot (Airway)
+```{r}
+data("airway")
+airway$dex <- as.factor(airway$dex)
+airway$cell <- as.factor(airway$cell)
+airway_df <- as.data.frame(colData(airway))
+
+ggplot(airway_df, aes(x = cell, fill = dex)) + geom_bar(position = "dodge")
+```
+
+## After: Styled Bar Plot with ggpubr
+```{r}
+ggbarplot(airway_df, x = "cell", fill = "dex", palette = "jco",
+          position = position_dodge()) +
+  theme_pubr()
+```
+
+## Plot with P-values (mtcars)
+```{r}
+ggboxplot(mtcars, x = "cyl", y = "mpg", fill = "cyl", palette = "npg") +
+  stat_compare_means()
+```
+
+## Faceting Example
+```{r}
+ggboxplot(mtcars, x = "gear", y = "mpg", fill = "gear") +
+  facet_wrap(~cyl) +
+  theme_pubr()
+```
+
+## Volcano Plot with Airway Data
+```{r}
+dds <- DESeqDataSet(airway, design = ~ cell + dex)
+dds <- DESeq(dds)
+res <- results(dds)
+res_df <- as.data.frame(res)
+res_df$gene <- rownames(res_df)
+
+EnhancedVolcano(res_df,
+                lab = res_df$gene,
+                x = 'log2FoldChange',
+                y = 'pvalue')
+```
+
+## Multiple Plots with ggarrange
+```{r}
+p1 <- ggboxplot(mtcars, x = "cyl", y = "mpg", fill = "cyl")
+p2 <- ggscatter(mtcars, x = "hp", y = "mpg", color = "cyl")
+ggarrange(p1, p2, ncol = 2, labels = c("A", "B"))
+```
+
+## Color Palettes: What Are Your Options?
+- `ggsci`: nature, jama, lancet, npg
+- `viridis`: colorblind-friendly gradients
+- `RColorBrewer`: classic palettes (`Set1`, `Dark2`)
+- `paletteer`: unified access to 100+ palettes
+
+## Viridis Example
+```{r}
+ggscatter(mtcars, x = "wt", y = "mpg", color = "hp") +
+  scale_color_viridis_c()
+```
+
+## RColorBrewer Example
+```{r}
+ggboxplot(mtcars, x = "cyl", y = "mpg", fill = "cyl") +
+  scale_fill_brewer(palette = "Set2")
+```
+
+## ggsci Example
+```{r}
+ggboxplot(mtcars, x = "cyl", y = "mpg", fill = "cyl") +
+  scale_fill_nejm()
+```
+
+## Plot Makeover: Before
+```{r}
+ggplot(mtcars, aes(factor(cyl), mpg)) + geom_boxplot()
+```
+
+## Plot Makeover: After
+```{r}
+ggboxplot(mtcars, x = "cyl", y = "mpg", fill = "cyl", palette = "npg") +
+  stat_compare_means() +
+  theme_pubr() +
+  labs(title = "MPG by Cylinder Count", x = "Cylinders", y = "Miles per Gallon")
+```
+
+## Exporting Plots with `ggsave`
+```{r eval=FALSE}
+ggsave("my_clean_plot.png", width = 6, height = 4, dpi = 300)
+```
+
